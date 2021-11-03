@@ -167,7 +167,7 @@ void signup(int client_sock)
     int fd = open("user", O_RDWR);
     if(fd == -1)
     {
-        printf("Error in opening th file\n");
+        printf("Error in opening the file\n");
         return;
     }
     char name[50], password[50];
@@ -494,19 +494,16 @@ void crud_user(int client_sock){
 		fcntl(fd_user, F_SETLKW, &lock);
 		int fp = lseek(fd_user, 0, SEEK_END);
 		int no_of_users = fp / sizeof(struct user);
-		no_of_users--;
 		write(client_sock, &no_of_users, sizeof(int));
 
 		lseek(fd_user,0,SEEK_SET);
-        no_of_users++;
+		printf("No of users == %d\n", no_of_users);
 		while(no_of_users--){
 			read(fd_user,&udb,sizeof(udb));
-			if(udb.type!=0){
-				write(client_sock,&udb.login_id,sizeof(int));
-				write(client_sock,&udb.name,sizeof(udb.name));
-				write(client_sock,&udb.type,sizeof(int));
-                write(client_sock,&udb.deleted,sizeof(int));
-			}
+			write(client_sock,&udb.login_id,sizeof(int));
+			write(client_sock,&udb.name,sizeof(udb.name));
+			write(client_sock,&udb.type,sizeof(int));
+            write(client_sock,&udb.deleted,sizeof(int));
 		}
 		response = 1;
 		lock.l_type = F_UNLCK;
@@ -877,7 +874,7 @@ int main()
 
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(8081);
+    server.sin_port = htons(8080);
 
     printf("Binding socket .....");
     int bd = bind(server_sock, (struct sockaddr *)&server, sizeof(server));

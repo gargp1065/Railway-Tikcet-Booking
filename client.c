@@ -358,7 +358,7 @@ int crud_user(int sock, int choice)
         int user_id, type,deleted;
         char user_name[50];
         read(sock, &no_of_users, sizeof(no_of_users));
-
+		// printf("No of user = %d\n", no_of_users);
         printf("User Id \t User Name \t User Type\n");
 		while(no_of_users--){
 			read(sock,&user_id,sizeof(user_id));
@@ -444,7 +444,7 @@ int main()
     
     server.sin_addr.s_addr = INADDR_ANY; 
     server.sin_family = AF_INET; 
-    server.sin_port = htons(8081); 
+    server.sin_port = htons(8080); 
    
     if (connect(client_sock, (struct sockaddr*)&server, sizeof(server)) < 0)
         perror("connect failed. Error"); 
