@@ -19,4 +19,4 @@ Three files are needed for the database which are uploaded.
 2. train
 3. booking
 
-First create an admin account and add train in the train file and themn proceed.
+First create an admin account and add train in the train file and then proceed.
